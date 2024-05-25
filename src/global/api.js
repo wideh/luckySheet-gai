@@ -2046,6 +2046,14 @@ export function getRangeHtml(options = {}) {
                     c_value = getcellvalue(r, c, d, "m");
                 }
 
+                // 修复当单元格内有换行获取不到值的问题
+                if (d[r][c].ct.hasOwnProperty("t") && d[r][c].ct.t === 'inlineStr') {
+                    let inlineStrValueArr = d[r][c].ct.s;
+                    if (inlineStrValueArr) {
+                        c_value =  inlineStrValueArr.map(i => i.v).join("").replace(/\n/g, "<br/>")
+                    }
+                }
+
                 style += menuButton.getStyleByCell(d, r, c);
 
                 if(getObjType(d[r][c]) == "object" && ("mc" in d[r][c])){
