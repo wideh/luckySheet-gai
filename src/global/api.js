@@ -2047,7 +2047,7 @@ export function getRangeHtml(options = {}) {
                 }
 
                 // 修复当单元格内有换行获取不到值的问题
-                if (d[r][c].ct.hasOwnProperty("t") && d[r][c].ct.t === 'inlineStr') {
+                if (d?.[r]?.[c]?.ct && d[r][c].ct.hasOwnProperty("t") && d[r][c]?.ct?.t === 'inlineStr') {
                     let inlineStrValueArr = d[r][c].ct.s;
                     if (inlineStrValueArr) {
                         c_value =  inlineStrValueArr.map(i => i.v).join("").replace(/\n/g, "<br/>")
