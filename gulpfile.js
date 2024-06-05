@@ -75,6 +75,7 @@ const paths = {
     staticExpendPlugins: ['src/expendPlugins/**', '!src/expendPlugins/**/plugin.js'],
     staticDemoData: ['src/demoData/*.js'],
     staticCssImages: ['src/css/**','!src/css/*.css'],
+    staticMethods: ['src/methods/*.js'],
 
     // static resources dest
     destStaticHtml: ['dist'],
@@ -84,6 +85,7 @@ const paths = {
     destStaticExpendPlugins: ['dist/expendPlugins'],
     destStaticDemoData: ['dist/demoData'],
     destStaticCssImages: ['dist/css'],
+    destStaticMethods: ['dist/methods'],
 
     //core es module
     core: ['src/**/*.js','!src/demoData/*.js','src/expendPlugins/**/plugin.js','!src/plugins/js/*.js'],
@@ -165,6 +167,7 @@ function watcher(done) {
     watch(paths.staticExpendPlugins,{ delay: 500 }, series(copyStaticExpendPlugins, reloadBrowser));
     watch(paths.staticDemoData,{ delay: 500 }, series(copyStaticDemoData, reloadBrowser));
     watch(paths.staticCssImages,{ delay: 500 }, series(copyStaticCssImages, reloadBrowser));
+    watch(paths.staticMethods,{ delay: 500 }, series(copyStaticMethods, reloadBrowser));
 
     done();
 }
@@ -289,13 +292,17 @@ function copyStaticDemoData(){
         // }))
         // .pipe(gulp.dest('dist'));
 }
+function copyStaticMethods() {
+    return src(paths.staticMethods)
+        .pipe(dest(paths.destStaticMethods));
+}
 function copyStaticCssImages(){
     return src(paths.staticCssImages)
         .pipe(dest(paths.destStaticCssImages));
 }
 
-const dev = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticCssImages, core), watcher, serve);
-const build = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticCssImages, core));
+const dev = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticMethods, copyStaticCssImages, core), watcher, serve);
+const build = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticMethods, copyStaticCssImages, core));
 
 exports.dev = dev;
 exports.build = build;

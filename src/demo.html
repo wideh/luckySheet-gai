@@ -1,0 +1,263 @@
+<html>
+
+<head>
+  <title>' '</title>
+  <style media="print">
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: unset !important;
+    }
+
+    table {
+      table-layout: fixed;
+      border-collapse: collapse;
+      max-width: 100%;
+    }
+
+    td {
+      padding: 4px;
+      max-width: 100px;
+      white-space: nomarl;
+      // word-break: break-all;
+      vertical-align: top !important;
+    }
+
+    tr {
+      page-break-inside: avoid;
+    }
+
+    .page-container-last {
+      page-break-before: always;
+    }
+
+    @media print {
+
+      @page {
+        size: 215mm 140mm;
+        margin: 0;
+      }
+
+      #print-container {
+        align-items: flex-start !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="print-container"
+    style="display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
+    <div style="position: relative; margin-bottom: 40px;">
+      <table data-type="luckysheet_copy_action_table">
+        <colgroup width="157px"></colgroup>
+        <colgroup width="144px"></colgroup>
+        <colgroup width="168px"></colgroup>
+        <colgroup width="141px"></colgroup>
+        <colgroup width="185px"></colgroup>
+        <colgroup width="142px"></colgroup>
+        <colgroup width="144px"></colgroup>
+        <colgroup width="141px"></colgroup>
+        <colgroup width="138px"></colgroup>
+        <colgroup width="265px"></colgroup>
+        <tbody>
+          <tr>
+            <td style="height:19px;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td rowspan="2" colspan="6"
+              style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;">{公司名称}</td>
+            <td style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style=""> </td>
+          </tr>
+          <tr>
+            <td style="height:24px;text-align: right;vertical-align: middle;font-size: 14pt;font-family: 宋体;">大楼名称：</td>
+            <td style="vertical-align: middle;font-size: 14pt;font-family: 宋体;">{楼宇}</td>
+            <td style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;">打印日期：</td>
+            <td style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;">{PrintDate}</td>
+          </tr>
+          <tr>
+            <td style="height:4px;text-align: right;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: center;vertical-align: middle;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;"> </td>
+          </tr>
+          <tr>
+            <td
+              style="height:19px;text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              房间代码：</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {资源编码}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+            </td>
+            <td
+              style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              客户名称：</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {客户名称}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+            </td>
+            <td
+              style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+            </td>
+            <td
+              style="text-align: right;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              银行账号：</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {BankACount}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="height:19px;vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              项目名称</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              建筑面积</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              上月读数</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              本月读数</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              本月用量</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              标准单价</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              本月费用</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              往月欠交</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              违约金</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;font-weight: bold;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              应交合计</td>
+          </tr>
+          <tr>
+            <td
+              style="height:19px;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {收费项目}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {建筑面积}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {上次抄表读数}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {本次抄表读数}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {用量}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {单价}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {ThisMonthFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {BeforeMonthFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {LateFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt dashed #FF715E;border-top:0.5pt solid #000000;">
+              {ShouldChargeAmount}</td>
+          </tr>
+          <tr>
+            <td rowspan="1" colspan="6"
+              style="height:19px;vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;border-bottom:0.5pt solid #000000;">
+              合计金额小写：</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              {TotalThisMonthFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              {TotalBeforeMonthFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              {TotalLateFee}</td>
+            <td
+              style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt dashed #FF715E;">
+              {TotalShouldChargeAmount}</td>
+          </tr>
+          <tr>
+            <td
+              style="height:37px;vertical-align: middle;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt solid #000000;">
+              应交金额合计大写：</td>
+            <td
+              style="vertical-align: middle;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-bottom:0.5pt solid #000000;border-top:0.5pt solid #000000;">
+            </td>
+            <td rowspan="1" colspan="8"
+              style="text-align: right;vertical-align: middle;font-size: 14pt;font-family: 宋体;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-top:0.5pt solid #000000;border-bottom:0.5pt solid #000000;">
+              {PaidMoneyUpperCase}</td>
+          </tr>
+          <tr>
+            <td rowspan="1" colspan="10"
+              style="height:48px;vertical-align: middle;border-left:0.5pt solid #000000;border-right:0.5pt solid #000000;border-top:0.5pt solid #000000;border-bottom:0.5pt solid #000000;">
+              说 1、本月20日前，请您及时在账户上存款或到管理处缴纳费用，逾期每拖欠一天加收千分之3违约金。
+              <br>明 2、水电抄表时间每月28日，如有不明之处请直接到管理处查询（管理处电话：8580252）
+            </td>
+          </tr>
+          <tr>
+            <td style="height:19px;"> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+          </tr>
+          <tr>
+            <td style="height:19px;"> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+          </tr>
+          <tr>
+            <td style="height:19px;"> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+            <td style="vertical-align: bottom;font-size: 14pt;font-family: 宋体;"> </td>
+            <td style=""> </td>
+            <td style=""> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
