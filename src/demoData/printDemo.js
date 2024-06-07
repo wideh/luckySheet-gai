@@ -342,17 +342,18 @@ const _renderExcel = (detail) => {
 }
 
 export const renderExcel = async(detail = detailData) => {
-  // 将详情数据分成每10条一次，打印
+  // 将详情数据分成每条Default_COUNT一次，打印
+  const Default_COUNT = 10;
   if (detail && Array.isArray(detail)) {
     const newDetail = [];
     for (let i = 0; i < detail.length; i++) {
       const item = detail[i];
       const dataList = item?.data;
-      if(dataList && dataList?.length > 10) {
-        for (let j = 0; j < dataList?.length; j += 10) {
+      if(dataList && dataList?.length > Default_COUNT) {
+        for (let j = 0; j < dataList?.length; j += Default_COUNT) {
           newDetail.push({
             templateVo: item.templateVo,
-            data: dataList.slice(j, j + 10)
+            data: dataList.slice(j, j + Default_COUNT)
           })
         }
       } else {
@@ -362,6 +363,8 @@ export const renderExcel = async(detail = detailData) => {
         })
       }
     }
+
+    // console.log('newDetail', newDetail);
 
     let res1 = false;
 
