@@ -177,14 +177,15 @@ const initLuckysheet = async (data) => {
   }
 };
 
-export const renderExcel = (detail = detailData) => {
-  printHtmlRef = document.createDocumentFragment();
-  if (detail && Array.isArray(detail)) {
+const _renderExcel = (detail) => {
+  return new Promise(resolve => {
+    printHtmlRef = document.createDocumentFragment();
+    // if (detail && Array.isArray(detail)) {
     const render = async () => {
       const luckysheet = window['luckysheet'];
       console.time("2");
-      for (let i = 0; i < detail.length; i++) {
-        const item = detail[i];
+      // for (let i = 0; i < detail.length; i++) {
+        const item = detail;
         const OrginTemplateData = item?.templateVo?.templateData;
         const pageWidth = item?.templateVo?.printWidth;
         const pageHeight = item?.templateVo?.printHeight;
@@ -328,14 +329,55 @@ export const renderExcel = (detail = detailData) => {
 
             // 此方法慢
             // sheetData2Img(i * DataLen + j != 0);
-            sheetData2HtmlDiv(i * DataLen + j != 0);
+            sheetData2HtmlDiv(1 * DataLen + j != 0);
           }
         }
-      }
+      // }
       console.timeEnd("2");
-      handlePrint()
+      resolve(true)
     };
     render();
+    // }
+  })
+}
+
+export const renderExcel = async(detail = detailData) => {
+  // 将详情数据分成每10条一次，打印
+  if (detail && Array.isArray(detail)) {
+    const newDetail = [];
+    for (let i = 0; i < detail.length; i++) {
+      const item = detail[i];
+      const dataList = item?.data;
+      if(dataList && dataList?.length > 10) {
+        for (let j = 0; j < dataList?.length; j += 10) {
+          newDetail.push({
+            templateVo: item.templateVo,
+            data: dataList.slice(j, j + 10)
+          })
+        }
+      } else {
+        newDetail.push({
+          templateVo: item.templateVo,
+          data: dataList
+        })
+      }
+    }
+
+    let res1 = false;
+
+    for (let i = 0; i < newDetail.length; i++) {
+      const detail = newDetail[i];
+      if(i == 0) {
+        await _renderExcel(detail);
+        res1 = await handlePrint();
+      } else {
+        if(res1) {
+          res1 = false
+          await _renderExcel(newDetail[0]);
+          res1 = await handlePrint();
+        }
+      }
+    }
   }
 }
 
@@ -472,75 +514,80 @@ const sheetData2HtmlDiv = isDivide => {
 };
   
 const handlePrint = () => {
-  var pel = document.createElement('div');
-  pel.style.display = 'flex';
-  pel.style.alignItems = 'center';
-  pel.style.justifyContent = 'center';
-  pel.style.flexDirection = 'column';
-  pel.style.margin = '0';
-  pel.style.padding = '0 20px';
+  return new Promise((resolve, reject) => {
+    var pel = document.createElement('div');
+    pel.style.display = 'flex';
+    pel.style.alignItems = 'center';
+    pel.style.justifyContent = 'center';
+    pel.style.flexDirection = 'column';
+    pel.style.margin = '0';
+    pel.style.padding = '0 20px';
 
-  pel.appendChild(printHtmlRef);
+    pel.appendChild(printHtmlRef);
 
-  // 创建iframe 打印
-  const printContent = pel.outerHTML;
+    // 创建iframe 打印
+    const printContent = pel.outerHTML;
 
-  const printHTML =
-    `<html><head><title>' '</title>` +
-    `<style media="print">
-      *{
-        padding: 0;
-        margin: 0;
-        font-family: unset !important;
-      }
-      table {
-        table-layout: fixed;
-        border-collapse: collapse;
-        max-width: 100%;
-      }
-      td {
-        padding: 4px;
-        max-width: 100px;
-        white-space: nomarl;
-        word-break: break-all;
-        vertical-align: top !important;
-        font-size: 10pt !important;
-      }
-      tr {
-        page-break-inside: avoid;
-        font-size: 10pt !important;
-      }
-
-      .page-container-last {
-        page-break-before: always;
-      }
-
-      @media print {
-        ${pageSizeRef}
-        body {
+    const printHTML =
+      `<html><head><title>' '</title>` +
+      `<style media="print">
+        *{
+          padding: 0;
           margin: 0;
+          font-family: unset !important;
         }
-      }
-    </style>
-    ` +
-    '</head><body>' +
-    printContent +
-    '</body></html>';
-  const iframe = document.createElement('iframe');
-  iframe.setAttribute('style', 'position: absolute; width: 0; height: 0;');
-  document.body.appendChild(iframe);
-  const iframeDoc = iframe.contentWindow.document;
+        table {
+          table-layout: fixed;
+          border-collapse: collapse;
+          max-width: 100%;
+        }
+        td {
+          padding: 4px;
+          max-width: 100px;
+          white-space: nomarl;
+          word-break: break-all;
+          vertical-align: top !important;
+          font-size: 10pt !important;
+        }
+        tr {
+          page-break-inside: avoid;
+          font-size: 10pt !important;
+        }
 
-  // 写入内容
-  iframeDoc.write(printHTML);
+        .page-container-last {
+          page-break-before: always;
+        }
 
-  console.log('打印内容', printHTML);
+        @media print {
+          ${pageSizeRef}
+          body {
+            margin: 0;
+          }
+        }
+      </style>
+      ` +
+      '</head><body>' +
+      printContent +
+      '</body></html>';
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('style', 'position: absolute; width: 0; height: 0;');
+    document.body.appendChild(iframe);
+    const iframeDoc = iframe.contentWindow.document;
 
-  iframeDoc.close();
-  iframe.contentWindow.focus();
+    // 写入内容
+    iframeDoc.write(printHTML);
 
-  iframe.contentWindow.addEventListener('load', function() {
-    iframe.contentWindow.print();
-    document.body.removeChild(iframe);
-  });
+    // console.log('打印内容', printHTML);
+
+    iframeDoc.close();
+    iframe.contentWindow.focus();
+
+    iframe.contentWindow.addEventListener('load', function() {
+      iframe.contentWindow.print();
+      document.body.removeChild(iframe);
+
+      // 打印完成后，再打印剩下页面
+      resolve(true)
+    });
+  })
 };
