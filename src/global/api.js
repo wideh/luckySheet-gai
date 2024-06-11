@@ -285,6 +285,12 @@ export function clearCell(row, column, options = {}) {
         delete cell["m"];
         delete cell["v"];
 
+        ['custom', 'enN', 'type'].forEach(key => {
+            if(cell?.[key] != null) {
+                delete cell?.[key];
+            }
+        })
+
         if(cell["f"] != null){
             delete cell["f"];
             formula.delFunctionGroup(row, column, order);
@@ -2947,8 +2953,6 @@ export function setSingleRangeFormat(attr, value, options = {}) {
 
     for (let r = range.row[0]; r <= range.row[1]; r++) {
         for (let c = range.column[0]; c <= range.column[1]; c++) {
-            console.log('r',r);
-            console.log('c',c);
             setCellValue(r, c, {[attr]: value}, {
                 order: order,
                 isRefresh: false,
@@ -4372,6 +4376,12 @@ export function clearRange(options = {}) {
                 if(getObjType(cell) == "object"){
                     delete cell["m"];
                     delete cell["v"];
+
+                    ['custom', 'enN', 'type'].forEach(key => {
+                        if(cell?.[key] != null) {
+                            delete cell?.[key];
+                        }
+                    })
 
                     if(cell["f"] != null){
                         delete cell["f"];
