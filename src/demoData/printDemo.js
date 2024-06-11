@@ -87,6 +87,7 @@ export const innerExcelAreaChange = (sheet) => {
         if (rowData?.length > 0) {
           for (let j = 0; j < rowData.length; j++) {
             const cell = rowData[j];
+            console.log('cell', cell);
             if (cell) {
               if (cell?.custom) {
                 setlistPlainVariables.push(cell.enN);
@@ -120,6 +121,9 @@ export const innerExcelAreaChange = (sheet) => {
       }
     }
   }
+
+  console.log('setlistListVariables', setlistListVariables);
+  console.log('setlistPlainVariables', setlistPlainVariables)
 
   return {
     setlistListVariables,
@@ -247,6 +251,8 @@ const _renderExcel = (detail) => {
               });
 
               if (target) {
+                console.log('target', target);
+                console.log('row', row);
                 const isAmount = checkIsAmount(target)
                 const value = dataItem[target];
                 if (value !== null || value !== undefined) {
@@ -343,7 +349,7 @@ const _renderExcel = (detail) => {
 
 export const renderExcel = async(detail = detailData) => {
   // 将详情数据分成每条Default_COUNT一次，打印
-  const Default_COUNT = 10;
+  const Default_COUNT = 1;
   if (detail && Array.isArray(detail)) {
     const newDetail = [];
     for (let i = 0; i < detail.length; i++) {
@@ -368,19 +374,29 @@ export const renderExcel = async(detail = detailData) => {
 
     let res1 = false;
 
-    for (let i = 0; i < newDetail.length; i++) {
-      const detail = newDetail[i];
-      if(i == 0) {
-        await _renderExcel(detail);
-        res1 = await handlePrint();
-      } else {
-        if(res1) {
-          res1 = false
-          await _renderExcel(newDetail[0]);
-          res1 = await handlePrint();
-        }
-      }
-    }
+    // for (let i = 0; i < newDetail.length; i++) {
+    //   const detail = newDetail[i];
+    //   if(i == 0) {
+    //     await _renderExcel(detail);
+    //     res1 = await handlePrint();
+    //   } else {
+    //     if(res1) {
+    //       res1 = false
+    //       await _renderExcel(newDetail[0]);
+    //       res1 = await handlePrint();
+    //     }
+    //   }
+    // }
+    const sheet = luckysheet.getSheet();
+    const item = newDetail[0]
+    await _renderExcel({
+      templateVo: {
+        ...item.templateVo,
+        templateData: JSON.stringify(sheet),
+      },
+      data: item?.data,
+    });
+    res1 = await handlePrint();
   }
 }
 
