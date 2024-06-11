@@ -4163,6 +4163,12 @@ const menuButton = {
                                 delete cell_clone.f;
                                 delete cell_clone.spl;
 
+                                ['custom', 'enN', 'type'].forEach(key => {
+                                    if(cell_clone?.[key] != null) {
+                                        delete cell_clone?.[key];
+                                    }
+                                })
+
                                 d[r][c] = cell_clone;
                             }
                         }
@@ -4228,6 +4234,12 @@ const menuButton = {
                                     delete cell_clone.ct;
                                     delete cell_clone.f;
                                     delete cell_clone.spl;
+
+                                    ['custom', 'enN', 'type'].forEach(key => {
+                                        if(cell_clone?.[key] != null) {
+                                            delete cell_clone?.[key];
+                                        }
+                                    })
 
                                     d[r][c] = cell_clone;
                                 }
