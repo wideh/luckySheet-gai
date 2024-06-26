@@ -4405,44 +4405,46 @@ const luckysheetformula = {
     getAllFunctionGroup: function() {
         let luckysheetfile = getluckysheetfile();
         let ret = [];
-        for (let i = 0; i < luckysheetfile.length; i++) {
-            let file = luckysheetfile[i];
-            let calcChain = file.calcChain;
-
-            /* 备注：再次加载表格获取的数据可能是JSON字符串格式(需要进行发序列化处理) */
-            if (calcChain) {
-                let tempCalcChain = [];
-                calcChain.forEach((item, idx) => {
-                    if (typeof item === "string") {
-                        tempCalcChain.push(JSON.parse(item));
-                    } else {
-                        tempCalcChain.push(item);
-                    }
-                });
-                calcChain = file.calcChain = tempCalcChain;
-            }
-
-            let dynamicArray_compute = file.dynamicArray_compute;
-            if (calcChain == null) {
-                calcChain = [];
-            }
-
-            if (dynamicArray_compute == null) {
-                dynamicArray_compute = [];
-            }
-
-            ret = ret.concat(calcChain);
-
-            for (let i = 0; i < dynamicArray_compute.length; i++) {
-                let d = dynamicArray_compute[0];
-                ret.push({
-                    r: d.r,
-                    c: d.c,
-                    index: d.index,
-                });
+        if(luckysheetfile && luckysheetfile?.length > 0) {
+            for (let i = 0; i < luckysheetfile.length; i++) {
+                let file = luckysheetfile[i];
+                let calcChain = file.calcChain;
+    
+                /* 备注：再次加载表格获取的数据可能是JSON字符串格式(需要进行发序列化处理) */
+                if (calcChain) {
+                    let tempCalcChain = [];
+                    calcChain.forEach((item, idx) => {
+                        if (typeof item === "string") {
+                            tempCalcChain.push(JSON.parse(item));
+                        } else {
+                            tempCalcChain.push(item);
+                        }
+                    });
+                    calcChain = file.calcChain = tempCalcChain;
+                }
+    
+                let dynamicArray_compute = file.dynamicArray_compute;
+                if (calcChain == null) {
+                    calcChain = [];
+                }
+    
+                if (dynamicArray_compute == null) {
+                    dynamicArray_compute = [];
+                }
+    
+                ret = ret.concat(calcChain);
+    
+                for (let i = 0; i < dynamicArray_compute.length; i++) {
+                    let d = dynamicArray_compute[0];
+                    ret.push({
+                        r: d.r,
+                        c: d.c,
+                        index: d.index,
+                    });
+                }
             }
         }
-
+        
         return ret;
     },
     getFunctionGroup: function(index) {
@@ -5301,9 +5303,11 @@ const luckysheetformula = {
 
         let sheets = getluckysheetfile();
         let sheetData = {};
-        for (let i = 0; i < sheets.length; i++) {
-            let sheet = sheets[i];
-            sheetData[sheet.index] = sheet.data;
+        if(sheets && sheets?.length > 0) {
+            for (let i = 0; i < sheets.length; i++) {
+                let sheet = sheets[i];
+                sheetData[sheet.index] = sheet.data;
+            }
         }
 
         //把修改涉及的单元格存储为对象
