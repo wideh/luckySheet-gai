@@ -1,4 +1,5 @@
-import detailData from './detailData.js'
+import detailData, { demoData2 } from './detailData.js'
+import { outputPDF } from './print.js'
 
 export const checkISExcelAreaBorder = function(x) {
   return (
@@ -143,6 +144,8 @@ let lcRef = false;
 
 let pageSizeRef = ''
 
+let pageWHRef = {}
+
 const initLuckysheet = async (data) => {
   const luckysheet = window['luckysheet'];
   if (luckysheet && !lcRef) {
@@ -195,6 +198,10 @@ const _renderExcel = (detail) => {
         const pageHeight = item?.templateVo?.printHeight;
 
         if(pageWidth && pageHeight) {
+          pageWHRef = {
+            width: pageWidth / 10,
+            height: pageHeight /10
+          }
           pageSizeRef = `
             @page {
               size: ${pageWidth / 10}mm ${pageHeight / 10}mm;
@@ -349,7 +356,7 @@ const _renderExcel = (detail) => {
 
 export const renderExcel = async(detail = detailData) => {
   // 将详情数据分成每条Default_COUNT一次，打印
-  const Default_COUNT = 1;
+  const Default_COUNT = 10;
   if (detail && Array.isArray(detail)) {
     const newDetail = [];
     for (let i = 0; i < detail.length; i++) {
@@ -370,8 +377,6 @@ export const renderExcel = async(detail = detailData) => {
       }
     }
 
-    // console.log('newDetail', newDetail);
-
     let res1 = false;
 
     // for (let i = 0; i < newDetail.length; i++) {
@@ -382,20 +387,13 @@ export const renderExcel = async(detail = detailData) => {
     //   } else {
     //     if(res1) {
     //       res1 = false
-    //       await _renderExcel(newDetail[0]);
+    //       await _renderExcel(detail);
     //       res1 = await handlePrint();
     //     }
     //   }
     // }
-    const sheet = luckysheet.getSheet();
     const item = newDetail[0]
-    await _renderExcel({
-      templateVo: {
-        ...item.templateVo,
-        templateData: JSON.stringify(sheet),
-      },
-      data: item?.data,
-    });
+    await _renderExcel(item);
     res1 = await handlePrint();
   }
 }
@@ -527,12 +525,13 @@ const sheetData2HtmlDiv = isDivide => {
   //   });
   // }
 
+  div.style.paddingTop = 10 + 'px';
   // div.style.marginBottom = 40 + 0 + 'px';
 
   printHtmlRef.appendChild(div);
 };
   
-const handlePrint = () => {
+const handlePrint = (isExportPdf = true) => {
   return new Promise((resolve, reject) => {
     var pel = document.createElement('div');
     pel.style.display = 'flex';
@@ -543,6 +542,28 @@ const handlePrint = () => {
     pel.style.padding = '0 20px';
 
     pel.appendChild(printHtmlRef);
+
+    if(isExportPdf) {
+      // 导出PDF
+      pel.style.position = 'fixed';
+      pel.style.zIndex = '-10';
+      pel.style.top = '0';
+      pel.style.left = '0';
+      pel.className = 'exportPdf'
+      pel.style.width = pageWHRef.width + 'mm';
+
+      document.body.appendChild(pel);
+
+      setTimeout(async() => {
+        // @ts-ignore
+        await outputPDF({
+          element: pel,
+          filename: '催费单' + new Date().getTime() + '.pdf'
+        });
+        resolve(true)
+      }, 50);
+      return;
+    }
 
     // 创建iframe 打印
     const printContent = pel.outerHTML;
@@ -561,7 +582,7 @@ const handlePrint = () => {
           max-width: 100%;
         }
         td {
-          padding: 4px;
+          padding: 2px;
           max-width: 100px;
           white-space: nomarl;
           word-break: break-all;

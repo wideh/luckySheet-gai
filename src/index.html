@@ -16,6 +16,33 @@
 
 	<!-- rollup luckysheet.js -->
 	<script src="./luckysheet.umd.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<style>
+		.exportPdf {
+			table {
+				table-layout: fixed;
+				border-collapse: collapse;
+				max-width: 100%;
+			}
+			td {
+				padding: 2px;
+				max-width: 100px;
+				white-space: nomarl;
+				word-break: break-all;
+				vertical-align: top !important;
+				font-size: 10pt !important;
+			}
+			tr {
+				page-break-inside: avoid;
+				font-size: 10pt !important;
+			}
+
+			.page-container-last {
+				page-break-before: always;
+			}
+		}
+	</style>
 </head>
 
 <body>
