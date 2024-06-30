@@ -428,7 +428,7 @@ const method = {
 
         sheetmanage.changeSheet(Store.luckysheetfile[0].index);
     },
-    destroy:function(){
+    destroy:function(setting){
         $("#" + Store.container).empty();
         $("body > .luckysheet-cols-menu").remove();
 
@@ -489,6 +489,12 @@ const method = {
 
         // remove proxy
         Store.asyncLoad = ['core'];
+
+        if(setting) {
+            if(setting?.success && typeof setting?.success == 'function') {
+                setting?.success()
+            }
+        }
     },
     editorChart:function(c){
         let chart_selection_color = luckyColor[0];
