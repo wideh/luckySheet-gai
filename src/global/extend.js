@@ -635,6 +635,11 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
                             range: emptyRange,
                         };
 
+                        if(cfg["borderInfo"][i]?.selfType) {
+                            console.log('增加行变化', emptyRange);
+                            bd_obj.selfType = cfg["borderInfo"][i]?.selfType;
+                        }
+
                         borderInfo.push(bd_obj);
                     }
                 } else if (rangeType == "cell") {
@@ -791,6 +796,11 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
                             color: cfg["borderInfo"][i].color,
                             range: emptyRange,
                         };
+
+                        if(cfg["borderInfo"][i]?.selfType) {
+                            console.log('增加列变化', emptyRange);
+                            bd_obj.selfType = cfg["borderInfo"][i]?.selfType;
+                        }
 
                         borderInfo.push(bd_obj);
                     }
@@ -1555,6 +1565,11 @@ function luckysheetdeletetable(type, st, ed, sheetIndex) {
                             range: emptyRange,
                         };
 
+                        if(cfg["borderInfo"][i]?.selfType) {
+                            console.log('删除行变化', emptyRange);
+                            bd_obj.selfType = cfg["borderInfo"][i]?.selfType;
+                        }
+
                         borderInfo.push(bd_obj);
                     }
                 } else if (rangeType == "cell") {
@@ -1672,6 +1687,11 @@ function luckysheetdeletetable(type, st, ed, sheetIndex) {
                             color: cfg["borderInfo"][i].color,
                             range: emptyRange,
                         };
+
+                        if(cfg["borderInfo"][i]?.selfType) {
+                            console.log('删除列变化', emptyRange);
+                            bd_obj.selfType = cfg["borderInfo"][i]?.selfType;
+                        }
 
                         borderInfo.push(bd_obj);
                     }
