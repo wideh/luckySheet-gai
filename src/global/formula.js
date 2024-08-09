@@ -1367,6 +1367,12 @@ const luckysheetformula = {
             delete curv.v;
             delete curv.m;
 
+            ['custom', 'enN', 'type'].forEach(key => {
+                if(curv?.[key] != null) {
+                    delete curv?.[key];
+                }
+            })
+
             if (curv.ct == null) {
                 curv.ct = {};
                 curv.ct.fa = "General";
@@ -3527,6 +3533,7 @@ const luckysheetformula = {
             let value = $editer.text(),
                 valuetxt = value;
             value = xssDeal(value);
+            // console.log('删除value', value);
             if (value.length > 0 && value.substr(0, 1) == "=" && (kcode != 229 || value.length == 1)) {
                 value = _this.functionHTMLGenerate(value);
                 value1 = _this.functionHTMLGenerate(value1txt);

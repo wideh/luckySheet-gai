@@ -3430,6 +3430,12 @@ export function cancelRangeMerge(options = {}) {
                         delete cell_clone.f;
                         delete cell_clone.spl;
 
+                        ['custom', 'enN', 'type'].forEach(key => {
+                            if(cell_clone?.[key] != null) {
+                                delete cell_clone?.[key];
+                            }
+                        })
+
                         data[r][c] = cell_clone;
                     }
                 }
