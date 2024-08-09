@@ -219,6 +219,15 @@ function setcellvalue(r, c, d, v) {
         }
     }
 
+    const isBraceStartAndEnd = (vupdate + '').startsWith('{') && (vupdate + '').endsWith('}')
+    if(!vupdate || !isBraceStartAndEnd) {
+        ['custom', 'enN', 'type'].forEach(key => {
+            if(cell?.[key] != null) {
+                delete cell?.[key];
+            }
+        })
+    }
+
     d[r][c] = cell;
     return cell;
 }
