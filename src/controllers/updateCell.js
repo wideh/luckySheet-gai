@@ -28,6 +28,8 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
         return;
     }
 
+    console.log('更新单元格数据');
+
     // 钩子函数
     if(!method.createHookFunction('cellEditBefore',Store.luckysheet_select_save)){return;}
 

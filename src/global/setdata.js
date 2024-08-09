@@ -44,11 +44,19 @@ function setcellvalue(r, c, d, v) {
         vupdate = v;
     }
 
+    // console.log('更新数据vupdate', vupdate);
+    
     // fix #81， vupdate = ''
     if (vupdate == null) {
         if (getObjType(cell) == "object") {
             delete cell.m;
             delete cell.v;
+
+            ['custom', 'enN', 'type'].forEach(key => {
+                if(cell?.[key] != null) {
+                    delete cell?.[key];
+                }
+            })
         } else {
             cell = null;
         }

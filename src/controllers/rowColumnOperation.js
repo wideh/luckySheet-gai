@@ -2234,6 +2234,8 @@ export function rowColumnOperationInitial() {
             return;
         }
 
+        console.log('清除单元格内容');
+
         $("#luckysheet-rightclick-menu").hide();
         luckysheetContainerFocus();
 
@@ -2300,6 +2302,12 @@ export function rowColumnOperationInitial() {
                             if (d[r][c]["ct"] != null && d[r][c]["ct"].t == "inlineStr") {
                                 delete d[r][c]["ct"];
                             }
+
+                            ['custom', 'enN', 'type'].forEach(key => {
+                                if(d[r][c]?.[key] != null) {
+                                    delete d[r][c]?.[key];
+                                }
+                            })
                         } else {
                             d[r][c] = null;
                         }
